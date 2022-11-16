@@ -1,7 +1,6 @@
-.Home {
+.Profile {
   position: relative;
   display: grid;
-  /* grid-template-columns: 18rem auto 20rem; */
   grid-template-columns: 24rem auto 26rem;
   gap: 1rem;
 }
