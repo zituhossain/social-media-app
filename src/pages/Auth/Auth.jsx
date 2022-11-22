@@ -1,10 +1,14 @@
 import "./Auth.css";
 import Logo from "../../assets/img/logo.png";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../slices/authSlice";
 
 const Auth = () => {
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  console.log(auth);
 
   const [isSignUp, setIsSignUp] = useState(true);
   const [confirmPass, setconfirmPass] = useState(true);
@@ -24,15 +28,14 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    dispatch(registerUser(data));
+
     if (isSignUp) {
-      data.password === data.confirmpass
-        ? dispatch(signUp(data))
-        : setconfirmPass(false);
-    } else {
-      dispatch(login(data));
+      if (data.password !== data.confirmpass) {
+        setconfirmPass(false);
+      }
     }
   };
-
   const resetForm = () => {
     setconfirmPass(true);
     setData({
